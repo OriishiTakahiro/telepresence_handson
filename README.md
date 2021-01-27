@@ -85,10 +85,10 @@ ingress.networking.k8s.io/ingress-sample created
 
 ```
 > cd app_container
-
+> vim main.go
 ```
 
-ここで `/ip` の返す内容を変更してみる
+`/ip` の返す内容を変更してみる
 
 ```
 > docker build -t demo .
