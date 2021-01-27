@@ -40,7 +40,7 @@ func main() {
 	})
 
 	e.GET("/ip", func(c echo.Context) error {
-		return c.String(http.StatusOK, "modified: "+podIP)
+		return c.String(http.StatusOK, ""+podIP)
 	})
 
 	e.GET("/date", func(c echo.Context) error {
