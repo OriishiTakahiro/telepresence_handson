@@ -6,7 +6,6 @@
 - [Dockerのインストール](https://docs.docker.com/get-docker/)
 - [kindのインストール](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [telepresenceのインストール](https://www.telepresence.io/reference/install) (実行に `python3` が必要なので、python3が動いていることを確認してください)
-- [k8sのリソースリポジトリ](https://github.com/OriishiTakahiro/k8s_handson)のクローン
 
 ## 実施手順
 
