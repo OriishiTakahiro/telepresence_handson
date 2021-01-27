@@ -1,5 +1,13 @@
 # Telepresenceハンズオン的なもの
 
+## Telepresenceとは？
+
+ローカルでコンテナを起動し、ポートフォワード を使ってリモートk8sクラスタのDeploymentと置き換えるツール  
+commit, pushのフローを経ずに実際のクラスタを使った挙動の確認ができるので、開発サイクルの高速化が期待できる  
+
+ソースコードをマウントしてのホットリロードと組み合わせると便利そう  
+(他の人も使うクラスタなら独占しすぎに注意)  
+
 ## 用意するもの
 
 - [kubectlのインストール](https://kubernetes.io/ja/docs/tasks/tools/install-kubectl/)
@@ -113,7 +121,7 @@ Successfully tagged demo:latest
 # クラスタのデプロイメントが削除されて置き換えられる過程を楽しめる
 > kubetl get deploy -w
 
-# teleprecenseを使ってプロキシ
+# teleprecenseを使ってdeploy-sampleと置換
 > telepresence --swap-deployment deploy-sample --expose 9200 --docker-run --rm -ti demo
 
 # 別のシェルから投げて置き換えられていることを確認
