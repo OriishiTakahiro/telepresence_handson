@@ -76,6 +76,49 @@ ingress.networking.k8s.io/ingress-sample created
 ### Teleperesenceを使ってみる
 
 ```
+> cd app_container
+
+```
+
+ここで `/ip` の返す内容を変更してみる
+
+```
+> docker build -t demo .
+Sending build context to Docker daemon  13.82kB
+Step 1/8 : FROM golang:1.15.6 as builder
+ ---> 5f9d35ce5cfe
+Step 2/8 : WORKDIR /go/src/app
+ ---> Using cache
+ ---> 330c59a08725
+Step 3/8 : COPY . .
+ ---> Using cache
+ ---> abdfb695110d
+Step 4/8 : RUN set -x &&     go mod download &&     CGO_ENABLED=0 GOOS=linux go build -o app .
+ ---> Using cache
+ ---> f6eb1fc3bc1b
+Step 5/8 : FROM alpine:latest
+ ---> d6e46aa2470d
+Step 6/8 : EXPOSE 9200
+ ---> Using cache
+ ---> 3f53b79d86db
+Step 7/8 : COPY --from=builder /go/src/app/app /app
+ ---> Using cache
+ ---> d46c9ad6c331
+Step 8/8 : CMD ["/app"]
+ ---> Using cache
+ ---> c490f42a1d80
+Successfully built c490f42a1d80
+Successfully tagged demo:latest
+
+# クラスタのデプロイメントが削除されて置き換えられる過程を楽しめる
+> kubetl get deploy -w
+
+# teleprecenseを使ってプロキシ
+> telepresence --swap-deployment deploy-sample --expose 9200 --docker-run --rm -ti demo
+
+# 別のシェルから投げて置き換えられていることを確認
+> curl http://localhost/ip
+modified: 10.244.2.12
 
 # お片づけ
 > kind delete cluster
